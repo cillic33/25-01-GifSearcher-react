@@ -1,10 +1,16 @@
 import {Button} from "../button/Button";
 import {ResultTypes} from "../../utils/constants";
-import {useNavigate} from "react-router-dom";
-
+import {useMatch, useNavigate} from "react-router-dom";
 
 export const Switcher = () => {
   const navigate = useNavigate();
+  const isSearch = useMatch(ResultTypes.Search);
+  const isRandom = useMatch(ResultTypes.Random);
+  const isTrends = useMatch(ResultTypes.Trends);
+
+  const activeCss = {
+    background: '#65a165'
+  }
 
   const handlerSearchClick = () => {
     navigate(ResultTypes.Search);
@@ -18,12 +24,11 @@ export const Switcher = () => {
     navigate(ResultTypes.Trends);
   }
 
-
   return (
     <>
-      <Button title="Search" onClick={handlerSearchClick} />
-      <Button title="Random" onClick={handlerRandomClick} />
-      <Button title="Trends" onClick={handlerTrendsClick} />
+      <Button title="Search" onClick={handlerSearchClick} style={isSearch ? activeCss : null} />
+      <Button title="Random" onClick={handlerRandomClick} style={isRandom ? activeCss : null} />
+      <Button title="Trends" onClick={handlerTrendsClick} style={isTrends ? activeCss : null} />
     </>
   );
 }

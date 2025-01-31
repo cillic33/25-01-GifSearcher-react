@@ -1,4 +1,4 @@
-export const BlocWelcome = () => {
+export const BlockWelcome = () => {
   return (
     <div>
       <h1>Welcome!</h1>

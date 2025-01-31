@@ -4,13 +4,13 @@ import {BlockWithSearch} from "./components/block-width-search/BlockWithSearch";
 import {BlockWithRandom} from "./components/block-with-random/BlockWithRandom";
 import {BlockWithTrends} from "./components/block-with-trends/BlockWithTrends";
 import {ResultTypes} from "./utils/constants";
-import {BlocWelcome} from "./components/block-welcome/BlocWelcome";
+import {BlockWelcome} from "./components/block-welcome/BlockWelcome";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<BlocWelcome />} />
+        <Route index element={<BlockWelcome />} />
         <Route path={ResultTypes.Search} element={<BlockWithSearch />} />
         <Route path={ResultTypes.Random} element={<BlockWithRandom />} />
         <Route path={ResultTypes.Trends} element={<BlockWithTrends />} />
