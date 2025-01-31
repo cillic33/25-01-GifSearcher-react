@@ -6,7 +6,6 @@ export const BlockWithRandom = () => {
   const dispatch = useAppDispatch();
   const status = useAppSelector(giphySelectors.status);
   const randomImage = useAppSelector(giphySelectors.randomImage);
-  const url = randomImage?.images.fixed_height.webp;
 
   const handleClick = () => {
     dispatch(giphyActions.fetchRandomImage())
@@ -18,19 +17,22 @@ export const BlockWithRandom = () => {
 
       <Button title="Get Random Image" onClick={handleClick} />
 
-      <div style={{height: '200px', margin: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px', background: '#efefef'}}>
+      <div style={{height: '300px', margin: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px', background: '#efefef'}}>
         {status === 'loading' &&
           <>Loading...</>
         }
 
-        {url && status === 'loaded' &&
-            <img src={url} />
+        {randomImage && randomImage.url && status === 'loaded' &&
+          <div>
+            <img src={randomImage.url} alt={randomImage.alt} style={{ maxWidth: '100%' }} />
+            <p>{randomImage.title}</p>
+          </div>
+        }
+
+        {status === 'error' &&
+          <>An error occurred when uploading the data</>
         }
       </div>
-
-      {/*<p>height {randomImage?.images.fixed_height.height}</p>
-
-      {randomImage?.images && JSON.stringify(randomImage?.images).toString()}*/}
 
     </div>
   );

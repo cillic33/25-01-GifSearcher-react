@@ -18,16 +18,22 @@ export const BlockWithSearch = () => {
       <Form onSubmit={handleSubmit} />
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center', margin: '20px 0', padding: '10px', background: '#efefef' }}>
-        {searchResults &&
+        {status === 'loading' &&
+          <>Loading...</>
+        }
+        {searchResults && status === 'loaded' &&
           searchResults.map(item => (
-            <div>
+            <div key={item.id}>
               <img
-              src={item.image}
+              src={item.url}
               alt={item.alt}
               height={item.height}
               />
             </div>
           ))
+        }
+        {status === 'error' &&
+          <>An error occurred when uploading the data</>
         }
       </div>
     </div>

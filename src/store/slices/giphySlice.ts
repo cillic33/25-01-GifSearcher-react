@@ -1,16 +1,20 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {fetchRandomImage, fetchSearchResults} from "../thunks/giphyAsyncActions";
+import {fetchRandomImage, fetchSearchResults, fetchTrendsResults} from "../thunks/giphyAsyncActions";
+import {GiphyRandomImage, GiphySearchItem, GiphyTrendsItem} from "../../types";
 
-/*interface GiphyState {
+interface GiphyState {
   status: "idle" | "loading" | "loaded" | "error";
-  randomImage: GiphyRandomData | undefined | null;
-}*/
+  randomImage: GiphyRandomImage | null;
+  searchResults: GiphySearchItem[] | null;
+  trendsResults: GiphyTrendsItem[] | null;
+}
 
 const initialState = {
   status: "idle",
   randomImage: null,
   searchResults: null,
-} /*satisfies GiphyState as GiphyState*/
+  trendsResults: null
+} satisfies GiphyState as GiphyState
 
 const giphySlice = createSlice({
   name: 'giphy',
@@ -18,35 +22,46 @@ const giphySlice = createSlice({
   reducers: {},
   extraReducers: builder =>
     builder
-      .addCase(fetchRandomImage.pending, (state) => {
+      .addCase(fetchRandomImage.pending, (state: GiphyState) => {
         state.status = "loading";
       })
-      .addCase(fetchRandomImage.fulfilled, (state, action) => {
+      .addCase(fetchRandomImage.fulfilled, (state: GiphyState, action) => {
         state.status = "loaded";
         state.randomImage = action.payload;
       })
-      .addCase(fetchRandomImage.rejected, (state) => {
+      .addCase(fetchRandomImage.rejected, (state: GiphyState) => {
         state.status = "error";
       })
-      .addCase(fetchSearchResults.pending, (state) => {
+      .addCase(fetchSearchResults.pending, (state: GiphyState) => {
         state.status = 'loading';
       })
-      .addCase(fetchSearchResults.fulfilled, (state, action) => {
+      .addCase(fetchSearchResults.fulfilled, (state: GiphyState, action) => {
         state.status = 'loaded';
         state.searchResults = action.payload;
       })
-      .addCase(fetchSearchResults.rejected, (state) => {
+      .addCase(fetchSearchResults.rejected, (state: GiphyState) => {
+        state.status = 'error';
+      })
+      .addCase(fetchTrendsResults.pending, (state: GiphyState) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchTrendsResults.fulfilled, (state: GiphyState, action) => {
+        state.status = 'loaded';
+        state.trendsResults = action.payload;
+      })
+      .addCase(fetchTrendsResults.rejected, (state: GiphyState) => {
         state.status = 'error';
       }),
   selectors: {
-    status: (state) => state.status,
-    randomImage: (state) => state.randomImage,
-    searchResults: (state) => state.searchResults
+    status: (state: GiphyState) => state.status,
+    randomImage: (state: GiphyState) => state.randomImage,
+    searchResults: (state: GiphyState) => state.searchResults,
+    trendsResults: (state: GiphyState) => state.trendsResults
   }
 })
 
 
-const giphyActions = {fetchRandomImage, fetchSearchResults};
+const giphyActions = {fetchRandomImage, fetchSearchResults, fetchTrendsResults};
 const giphySelectors = giphySlice.selectors;
 
 export {giphySlice, giphyActions, giphySelectors};

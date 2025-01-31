@@ -1,4 +1,4 @@
-export interface GiphyRandomData {
+/*export interface GiphyRandomData {
   "type": string;
   "id": string;
   "url": string;
@@ -214,12 +214,25 @@ export interface GiphyRandomResponse {
     "msg": string;
     "response_id": string;
   }
+}*/
+
+export interface GiphyRandomImage {
+  id: string;
+  url: string;
+  alt: string;
+  title: string;
 }
-
-
 export interface GiphySearchItem {
   id: string;
-  image: string;
+  url: string;
+  height: string;
+  alt: string;
+  date: string;
+}
+
+export interface GiphyTrendsItem {
+  id: string;
+  url: string;
   height: string;
   alt: string;
   date: string;
