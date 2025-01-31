@@ -18,7 +18,7 @@ export const BlockWithRandom = () => {
 
       <Button title="Get Random Image" onClick={handleClick} />
 
-      <div style={{height: '200px', margin: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#efefef'}}>
+      <div style={{height: '200px', margin: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px', background: '#efefef'}}>
         {status === 'loading' &&
           <>Loading...</>
         }

@@ -1,7 +1,8 @@
 import {Input} from "../input/Input";
-import {ChangeEvent, FormEvent, useState} from "react";
+import {ChangeEvent, FC, FormEvent, useState} from "react";
+import {Props} from "./props";
 
-export const Form = () => {
+export const Form: FC<Props> = ({onSubmit}) => {
   const [query, setQuery] = useState<string>('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +12,7 @@ export const Form = () => {
   const submitHandle = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log('query', query)
+    onSubmit(query);
   }
 
   return (

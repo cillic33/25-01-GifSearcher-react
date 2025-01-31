@@ -207,7 +207,7 @@ export interface GiphyRandomData {
   "alt_text": string;
 }
 
-export interface GiphyRandom {
+export interface GiphyRandomResponse {
   "data": GiphyRandomData,
   "meta":{
     "status": number;
@@ -216,4 +216,12 @@ export interface GiphyRandom {
   }
 }
 
+
+export interface GiphySearchItem {
+  id: string;
+  image: string;
+  height: string;
+  alt: string;
+  date: string;
+}
 
